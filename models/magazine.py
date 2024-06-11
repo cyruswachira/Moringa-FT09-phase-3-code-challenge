@@ -14,8 +14,7 @@ class Magazine:
 
     @name.setter
     def name(self, value):
-        if isinstance(value, str) and 2 <= len(value) <= 16:
-            self._name = value
+        self._name = value
 
 
     @property
@@ -68,7 +67,7 @@ class Magazine:
             HAVING article_count > 2
         """, (self._id,))
         authors_data = cursor.fetchall()
-        return authors_data if authors_data else None
+        return authors_data 
 
 
       
