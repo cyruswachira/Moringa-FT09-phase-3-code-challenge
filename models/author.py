@@ -14,11 +14,11 @@ class Author:
     @name.setter
     def name(self, value):
         if not isinstance(value, str):
-            raise TypeError("Name must be a string.")
+            raise TypeError("Input a string.")
         if len(value) == 0:
-            raise ValueError("Name must not be empty.")
+            raise ValueError("Name must not be blank.")
         if hasattr(self, '_name'):
-            raise AttributeError("Name cannot be changed after instantiation.")
+            raise AttributeError("Name cannot be replaced.")
         self._name = value
 
     def create_author(self, cursor):
