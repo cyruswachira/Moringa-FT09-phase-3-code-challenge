@@ -18,8 +18,6 @@ class Article:
     def title(self, value):
         if isinstance(value, str) and 5 <= len(value) <= 50:
             self._title = value
-        else:
-            raise ValueError("Title must be a string between 5 and 50 characters")
 
          
     @classmethod
@@ -37,7 +35,7 @@ class Article:
     def get_title(cls, cursor):
         cursor.execute("SELECT title FROM articles")
         titles = cursor.fetchall()
-        return [title[0] for title in titles] if titles else None
+        return [title[0] for title in titles]
 
 
     def get_author(self, cursor):
