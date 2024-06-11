@@ -21,15 +21,19 @@ class Article:
         else:
             raise ValueError("Title must be a string between 5 and 50 characters")
 
+         
     @classmethod
-       # inserting a new article 
     def create_article(cls, cursor, title, content, author_id, magazine_id):
         cursor.execute("INSERT INTO articles (title, content, author_id, magazine_id) VALUES (?, ?, ?, ?)", (title, content, author_id, magazine_id))
         article_id = cursor.lastrowid
         return cls(article_id, title, content, author_id, magazine_id)
 
     @classmethod
-        # getting all article titles
+    def get_magazine(self, cursor):
+        cursor.execute("SELECT name FROM magazines WHERE id = ?", (self._magazine_id,))
+        magazine_name = cursor.fetchone()
+        return magazine_name   
+
     def get_title(cls, cursor):
         cursor.execute("SELECT title FROM articles")
         titles = cursor.fetchall()
@@ -42,7 +46,4 @@ class Article:
         return author_name
 
 
-    def get_magazine(self, cursor):
-        cursor.execute("SELECT name FROM magazines WHERE id = ?", (self._magazine_id,))
-        magazine_name = cursor.fetchone()
-        return magazine_name
+   
